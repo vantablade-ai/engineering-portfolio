@@ -1,6 +1,6 @@
-McCallum Clarke — Engineering Portfolio
+# McCallum Clarke — Engineering Portfolio
 
-Full-Stack & Applied AI Engineer
+## Full-Stack & Applied AI Engineer
 
 Product Systems • APIs • Data Pipelines • Integrations • Intelligent Automation
 
@@ -12,10 +12,11 @@ My strongest technical differentiation is in end-to-end product ownership combin
 
 ---
 
-End-to-end product engineering
+## End-to-end product engineering
 
 I work across the full product boundary rather than treating frontend, backend, data, and AI as disconnected disciplines.
 
+```mermaid
 flowchart LR
     A["Product Interfaces<br/>React / Next.js / TypeScript"]
     --> B["Typed Client / API Contracts"]
@@ -23,6 +24,7 @@ flowchart LR
     --> D["Data & Persistence<br/>PostgreSQL / Supabase"]
     --> E["Integrations & Workflows"]
     --> F["Applied AI & Operator Controls"]
+```
 
 This includes:
 
@@ -44,9 +46,9 @@ The result is product engineering that can span a feature from interface and wor
 
 ---
 
-Engineering thesis
+## Engineering thesis
 
-Reliability around uncertain boundaries
+### Reliability around uncertain boundaries
 
 A recurring engineering problem across my work is making systems reliable where uncertainty enters.
 
@@ -62,6 +64,7 @@ Long-running workflows need provenance, resumability, explicit failure state, an
 
 I use typed contracts, deterministic rules, idempotency, provenance, explicit state, integrity checks, review boundaries, and recovery paths to make those systems inspectable and controllable.
 
+```mermaid
 flowchart TD
     A["Reliable systems around uncertain boundaries"]
 
@@ -74,6 +77,7 @@ flowchart TD
     C --> G["Controlled AI Decision Pipeline"]
     D --> H["Reliable Webhook Workflow"]
     E --> I["Signal-to-Content Automation Pipeline"]
+```
 
 The four public repositories below are standalone demonstrations of those engineering patterns.
 
@@ -81,15 +85,15 @@ They are not the limit of my capability. Broader full-stack, SaaS, frontend, bac
 
 ---
 
-Public engineering proofs
+## Public engineering proofs
 
-1. "Reliable Data Intake Pipeline" (https://github.com/vantablade-ai/reliable-data-intake-pipeline)
+1. [**Reliable Data Intake Pipeline**](https://github.com/vantablade-ai/reliable-data-intake-pipeline)
 
 A reliability-focused ingestion service that validates, normalizes, conservatively deduplicates, and routes heterogeneous provider data into canonical application records.
 
 Provider-specific adapters feed typed models and deterministic decision logic, with idempotency semantics, transactional persistence, provenance, conflict handling, and observable failure states.
 
-Demonstrates
+### Demonstrates
 
 - FastAPI API boundaries
 - provider-adapter architecture
@@ -107,13 +111,13 @@ Demonstrates
 - offline automated tests
 - deterministic failure-path testing
 
-Engineering boundary
+### Engineering boundary
 
 The proof uses synthetic providers and local SQLite persistence so the data-reliability behavior remains easy to inspect and reproduce.
 
 It does not claim production-scale throughput or replace separate PostgreSQL/Supabase product experience.
 
-Commercial relevance
+### Commercial relevance
 
 Useful patterns for:
 
@@ -129,12 +133,13 @@ Useful patterns for:
 
 ---
 
-2. "Controlled AI Decision Pipeline" (https://github.com/vantablade-ai/controlled-ai-decision-pipeline)
+2. [**Controlled AI Decision Pipeline**](https://github.com/vantablade-ai/controlled-ai-decision-pipeline)
 
 An applied-AI system that turns evidence into structured AI-assisted decisions while keeping final authority in deterministic policy and human review.
 
 The architecture separates evidence, deterministic observations, model reasoning, confidence, evidence quality, policy, authority, and approval state.
 
+```mermaid
 flowchart LR
     A["Evidence"]
     --> B["Deterministic Observations"]
@@ -143,8 +148,9 @@ flowchart LR
     --> E["Schema Validation"]
     --> F["Deterministic Authority Policy"]
     --> G["Human Approval / Safe Action"]
+```
 
-Demonstrates
+### Demonstrates
 
 - typed AI boundaries
 - schema-constrained model outputs
@@ -165,13 +171,13 @@ Demonstrates
 - explicit missing/conflicting evidence
 - non-actionable failure states
 
-Engineering boundary
+### Engineering boundary
 
 The model can reason and recommend, but it does not grant itself operational authority.
 
 High model confidence cannot compensate for poor evidence, and weak or conflicting evidence cannot silently become an automatic action.
 
-Commercial relevance
+### Commercial relevance
 
 Useful patterns for:
 
@@ -186,12 +192,13 @@ Useful patterns for:
 
 ---
 
-3. "Reliable Webhook Workflow" (https://github.com/vantablade-ai/reliable-webhook-workflow)
+3. [**Reliable Webhook Workflow**](https://github.com/vantablade-ai/reliable-webhook-workflow)
 
 A durable webhook-processing system that accepts external events quickly and processes them through retryable background execution.
 
 Signed intake leads to persisted events and jobs, atomic worker claims, leases, retry/backoff behavior, stale-worker recovery, dead-letter handling, and explicit execution history.
 
+```mermaid
 flowchart LR
     A["Signed Webhook"]
     --> B["Validate + Fingerprint"]
@@ -200,8 +207,9 @@ flowchart LR
     --> E["Worker Claim"]
     --> F["Downstream Operation"]
     --> G["Success / Retry / Dead Letter"]
+```
 
-Demonstrates
+### Demonstrates
 
 - FastAPI webhook boundaries
 - raw-body HMAC-SHA256 verification
@@ -223,13 +231,13 @@ Demonstrates
 - deterministic clock/jitter testing
 - recoverable at-least-once execution
 
-Engineering boundary
+### Engineering boundary
 
 The proof does not claim distributed exactly-once side effects.
 
 If a worker dies after an external side effect succeeds but before local completion is committed, the operation may be attempted again. Downstream systems still require their own idempotency where that boundary matters.
 
-Commercial relevance
+### Commercial relevance
 
 Useful patterns for:
 
@@ -244,12 +252,13 @@ Useful patterns for:
 
 ---
 
-4. "Signal-to-Content Automation Pipeline" (https://github.com/vantablade-ai/signal-to-content-automation-pipeline)
+4. [**Signal-to-Content Automation Pipeline**](https://github.com/vantablade-ai/signal-to-content-automation-pipeline)
 
 A resumable multi-stage automation pipeline that transforms heterogeneous source material into structured, traceable artifacts.
 
 Source adapters, normalization, filtering, deduplication, AI-assisted stages, deterministic ranking, media generation, and packaging are coordinated through explicit dependencies and cache-aware execution.
 
+```mermaid
 flowchart LR
     A["Sources"]
     --> B["Normalize"]
@@ -267,8 +276,9 @@ flowchart LR
     F -. state .-> I
     G -. hashes .-> I
     H -. final artifacts .-> I
+```
 
-Demonstrates
+### Demonstrates
 
 - source-adapter architecture
 - canonical normalization
@@ -293,13 +303,13 @@ Demonstrates
 - local artifact packaging
 - deterministic offline execution
 
-Engineering boundary
+### Engineering boundary
 
 Publishing, uploading, and social-media posting are intentionally outside this proof.
 
 The focus is the reliability of a multi-stage artifact-producing workflow: preserving lineage, avoiding unnecessary recomputation, isolating failures, and resuming safely.
 
-Commercial relevance
+### Commercial relevance
 
 Useful patterns for:
 
@@ -314,39 +324,40 @@ Useful patterns for:
 
 ---
 
-Public proof capability matrix
+## Public proof capability matrix
 
 "✓" means the behavior is directly demonstrated by that repository.
 
-Capability| Data Intake| AI Decision| Webhook Workflow| Automation Pipeline
-Typed contracts| ✓| ✓| ✓| ✓
-API boundary| ✓| ✓| ✓| —
-Adapter/provider abstraction| ✓| ✓| ✓| ✓
-Canonical normalization| ✓| —| —| ✓
-Duplicate/idempotency handling| ✓| —| ✓| ✓
-Explicit conflict/failure handling| ✓| ✓| ✓| ✓
-Provenance / auditability| ✓| ✓| ✓| ✓
-Structured AI output| —| ✓| —| ✓
-Deterministic policy| ✓| ✓| ✓| ✓
-Human approval boundary| —| ✓| —| —
-Background execution| —| —| ✓| —
-Retry / recovery| —| —| ✓| ✓
-Artifact or payload hashing| ✓| ✓| ✓| ✓
-Dependency-aware caching| —| —| —| ✓
-Resumability| —| —| ✓| ✓
-Integrity verification| ✓| ✓| ✓| ✓
-Offline deterministic testing| ✓| ✓| ✓| ✓
-Media processing| —| —| —| ✓
+| Capability | Data Intake | AI Decision | Webhook Workflow | Automation Pipeline |
+| --- | --- | --- | --- | --- |
+| Typed contracts | ✓ | ✓ | ✓ | ✓ |
+| API boundary | ✓ | ✓ | ✓ | — |
+| Adapter/provider abstraction | ✓ | ✓ | ✓ | ✓ |
+| Canonical normalization | ✓ | — | — | ✓ |
+| Duplicate/idempotency handling | ✓ | — | ✓ | ✓ |
+| Explicit conflict/failure handling | ✓ | ✓ | ✓ | ✓ |
+| Provenance / auditability | ✓ | ✓ | ✓ | ✓ |
+| Structured AI output | — | ✓ | — | ✓ |
+| Deterministic policy | ✓ | ✓ | ✓ | ✓ |
+| Human approval boundary | — | ✓ | — | — |
+| Background execution | — | — | ✓ | — |
+| Retry / recovery | — | — | ✓ | ✓ |
+| Artifact or payload hashing | ✓ | ✓ | ✓ | ✓ |
+| Dependency-aware caching | — | — | — | ✓ |
+| Resumability | — | — | ✓ | ✓ |
+| Integrity verification | ✓ | ✓ | ✓ | ✓ |
+| Offline deterministic testing | ✓ | ✓ | ✓ | ✓ |
+| Media processing | — | — | — | ✓ |
 
 ---
 
-Broader engineering capability
+## Broader engineering capability
 
 The public repositories are evidence anchors, not a complete capability inventory.
 
 Broader capability is backed by additional current and historical product engineering work, even where the underlying source is not publicly inspectable.
 
-Full-stack product systems
+### Full-stack product systems
 
 - end-to-end product/system ownership
 - React, Next.js, and TypeScript application engineering
@@ -367,7 +378,7 @@ Full-stack product systems
 
 Frontend engineering is a core part of my full-stack product capability, while advanced browser/platform specialization is a separate discipline I do not claim.
 
-Backend & APIs
+### Backend & APIs
 
 - Python backend engineering
 - FastAPI
@@ -384,7 +395,7 @@ Backend & APIs
 - backend and API testing
 - failure-path and edge-case testing
 
-Applied AI
+### Applied AI
 
 - OpenAI API integration
 - prompt and system-instruction design
@@ -400,7 +411,7 @@ Applied AI
 - evidence/conflict presentation
 - advisory and approval workflows
 
-Data & reliability
+### Data & reliability
 
 - ingestion pipelines
 - provider adapters
@@ -424,7 +435,7 @@ Data & reliability
 - CSV export generation
 - operational data modeling
 
-Integrations & SaaS systems
+### Integrations & SaaS systems
 
 - OAuth 2.0
 - OAuth state validation
@@ -446,7 +457,7 @@ Integrations & SaaS systems
 - incident/case workflows
 - storage and reporting integrations
 
-Automation & operational systems
+### Automation & operational systems
 
 - background and scheduled workflows
 - state-machine and lifecycle modeling
@@ -466,7 +477,7 @@ Automation & operational systems
 
 ---
 
-Product-system examples
+## Product-system examples
 
 Broader product work includes systems such as:
 
@@ -489,7 +500,7 @@ These systems span UI state, typed API clients, backend services, authorization,
 
 ---
 
-Engineering principles
+## Engineering principles
 
 I tend to design systems around a few recurring principles:
 
@@ -508,12 +519,13 @@ I tend to design systems around a few recurring principles:
 
 ---
 
-Evidence discipline
+## Evidence discipline
 
 Claims in this portfolio are tied to implemented current, historical, or public repository evidence.
 
 Historical implementation remains valid engineering evidence and is described in its proper context. Public proof repositories provide externally inspectable demonstrations of selected engineering patterns; they do not define or limit the broader capability map.
 
+```mermaid
 flowchart LR
     A["Current Product Engineering"]
     --> D["Evidence-Backed Capability Map"]
@@ -526,6 +538,7 @@ flowchart LR
 
     D --> E["Portfolio & Services Positioning"]
     E --> F["Targeted Resumes / LinkedIn / Applications"]
+```
 
 I distinguish between implemented capability and specialist depth.
 
@@ -550,7 +563,7 @@ The public proof repositories are not presented as production deployments.
 
 ---
 
-Work
+## Work
 
 Available for engineering work involving:
 
@@ -569,4 +582,4 @@ Available for engineering work involving:
 
 I can work inside an existing codebase or own a bounded system across frontend, backend, data, integrations, AI, and operational workflow boundaries.
 
-Contact me through the public methods on my "GitHub profile" (https://github.com/vantablade-ai).
+Contact me through the public methods on my [**GitHub profile**](https://github.com/vantablade-ai).
